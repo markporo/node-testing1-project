@@ -28,8 +28,8 @@ function trimProperties(obj) {
  */
 function trimPropertiesMutation(obj) {
   // ✨ implement
-  for (const key in obj) {
-    obj[key] = obj[key].trim();
+  for (const prop in obj) {
+    obj[prop] = obj[prop].trim();
   }
   return obj;
 }
@@ -44,17 +44,11 @@ function trimPropertiesMutation(obj) {
  */
 function findLargestInteger(integers) {
   // ✨ implement
-  const newArray = [];
-  Object.keys(integers)
-    .forEach(val => {
-      newArray.push(val)
-    });
-
   let max = 0;
 
-  for (let i = 0; i <= newArray.length; i++) {
-    if (newArray[i] > max) {
-      max = newArray[i]
+  for (let i = 0; i < integers.length; i++) {
+    if (integers[i].integer > max) {
+      max = integers[i].integer
     }
   }
 
@@ -62,7 +56,7 @@ function findLargestInteger(integers) {
 }
 
 
-console.log(findLargestInteger([{ integer: 1 }, { integer: 22 }, { integer: 2 }]))
+//console.log(findLargestInteger([{ integer: 1 }, { integer: 22 }, { integer: 2 }]))
 
 class Counter {
   /**
@@ -71,6 +65,8 @@ class Counter {
    */
   constructor(initialNumber) {
     // ✨ initialize whatever properties are needed
+    this.count = initialNumber
+
   }
 
   /**
@@ -87,6 +83,7 @@ class Counter {
    */
   countDown() {
     // ✨ implement
+    return this.count > 0 ? this.count-- : 0
   }
 }
 
@@ -96,6 +93,8 @@ class Seasons {
    */
   constructor() {
     // ✨ initialize whatever properties are needed
+    this.seasons = ['summer', 'fall', 'winter', 'spring']
+    this.currentSeason = 0
   }
 
   /**
@@ -112,6 +111,29 @@ class Seasons {
    */
   next() {
     // ✨ implement
+    const season = this.seasons[this.currentSeason]
+
+    switch (this.currentSeason) {
+      case 0:
+        // code block
+        this.currentSeason = 1;
+        break;
+      case 1:
+        // code block
+        this.currentSeason = 2;
+        break;
+      case 2:
+        // code block
+        this.currentSeason = 3;
+        break;
+      case 3:
+        // code block
+        this.currentSeason = 0;
+        break;
+      default:
+      // code block
+    }
+    return season;
   }
 }
 
