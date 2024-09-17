@@ -8,7 +8,15 @@
  */
 function trimProperties(obj) {
   // ✨ implement
+  const newObj = Object.keys(obj).reduce((acc, curr) => {
+    acc[curr] = obj[curr].trim()
+    return acc;
+  }, {});
+
+  return newObj;
 }
+
+//console.log(trimProperties({ name: "  jane  ", lastName: "   BOB" }))
 
 /**
  * [Exercise 2] trimPropertiesMutation trims in place the properties of an object
@@ -20,6 +28,10 @@ function trimProperties(obj) {
  */
 function trimPropertiesMutation(obj) {
   // ✨ implement
+  for (const prop in obj) {
+    obj[prop] = obj[prop].trim();
+  }
+  return obj;
 }
 
 /**
@@ -32,7 +44,19 @@ function trimPropertiesMutation(obj) {
  */
 function findLargestInteger(integers) {
   // ✨ implement
+  let max = 0;
+
+  for (let i = 0; i < integers.length; i++) {
+    if (integers[i].integer > max) {
+      max = integers[i].integer
+    }
+  }
+
+  return max;
 }
+
+
+//console.log(findLargestInteger([{ integer: 1 }, { integer: 22 }, { integer: 2 }]))
 
 class Counter {
   /**
@@ -41,6 +65,8 @@ class Counter {
    */
   constructor(initialNumber) {
     // ✨ initialize whatever properties are needed
+    this.count = initialNumber
+
   }
 
   /**
@@ -57,6 +83,7 @@ class Counter {
    */
   countDown() {
     // ✨ implement
+    return this.count > 0 ? this.count-- : 0
   }
 }
 
@@ -66,6 +93,8 @@ class Seasons {
    */
   constructor() {
     // ✨ initialize whatever properties are needed
+    this.seasons = ['summer', 'fall', 'winter', 'spring']
+    this.currentSeason = 0
   }
 
   /**
@@ -82,6 +111,29 @@ class Seasons {
    */
   next() {
     // ✨ implement
+    const season = this.seasons[this.currentSeason]
+
+    switch (this.currentSeason) {
+      case 0:
+        // code block
+        this.currentSeason = 1;
+        break;
+      case 1:
+        // code block
+        this.currentSeason = 2;
+        break;
+      case 2:
+        // code block
+        this.currentSeason = 3;
+        break;
+      case 3:
+        // code block
+        this.currentSeason = 0;
+        break;
+      default:
+      // code block
+    }
+    return season;
   }
 }
 
@@ -95,7 +147,10 @@ class Car {
   constructor(name, tankSize, mpg) {
     this.odometer = 0 // car initilizes with zero miles
     this.tank = tankSize // car initiazes full of gas
+    this.tankSize = tankSize
     // ✨ initialize whatever other properties are needed
+    this.availableMiles = tankSize * mpg
+    this.mpg = mpg
   }
 
   /**
@@ -113,6 +168,13 @@ class Car {
    */
   drive(distance) {
     // ✨ implement
+
+    if (distance <= this.availableMiles) {
+      this.odometer += distance
+      this.availableMiles = this.availableMiles - distance
+    }
+
+    return this.odometer
   }
 
   /**
@@ -128,6 +190,14 @@ class Car {
    */
   refuel(gallons) {
     // ✨ implement
+
+    this.availableMiles = this.availableMiles + (gallons * this.mpg)
+
+    if (this.availableMiles >= this.tankSize * this.mpg) {
+      this.availableMiles = this.tankSize * this.mpg
+    }
+
+    return this.availableMiles
   }
 }
 
@@ -144,8 +214,14 @@ class Car {
  *    // result is false
  * })
  */
-function isEvenNumberAsync(number) {
+async function isEvenNumberAsync(number) {
   // ✨ implement
+  if (typeof number !== 'number' || isNaN(number)) {
+    throw new Error('number must be a number')
+  } else {
+    const isEven = number % 2 == 0 ? Promise.resolve(true) : Promise.resolve(false)
+    return isEven
+  }
 }
 
 module.exports = {
